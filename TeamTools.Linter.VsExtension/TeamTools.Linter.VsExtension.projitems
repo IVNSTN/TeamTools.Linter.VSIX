@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>b08c9355-3200-4cc3-ba92-01f0e8ac6669</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>TeamTools.VisualStudio.SqlExtension</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)GeneralErrorArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CodingAssistants\ActiveTabContentsHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CodingAssistants\BaseCodeEditingAssistantVSAdapter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CodingAssistants\BeginEndAssistantVSAdapter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CodingAssistants\FinalGoAssistantVSAdapter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CodingAssistants\ShorthandOrFullNameAssistantVSAdapter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CodingAssistants\TwoWordInstructionAssistantVSAdapter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Linting\DocsLinkBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Linting\ILinterService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Linting\_LinterService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Linting\LinterMessageMarker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Linting\LinterSnapshot.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Linting\LinterSnapshotFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Linting\LinterMessage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Linting\LinterMessageRange.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Linting\LintingCachedReporter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RuleHandlingErrorArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Suggestions\BaseSuggestedAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Suggestions\BaseSuggestedActionsSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Suggestions\BaseSuggestedActionsSourceProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Suggestions\ConstraintNamingSuggestedActionsProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Suggestions\ConstraintNamingSuggestedActionsSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Suggestions\ConstraintNamingFixAction.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LintExtensionMenuHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Linting\LintingAssistant.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CodingAssistants\LintingAssistantVSAdapter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LintPackage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tagging\ILinterTaggerProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tagging\ItemProjectLocator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tagging\SeverityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tagging\TaggerManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tagging\SinkManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tagging\UriExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tagging\_TaggerProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tagging\_LinterTagger.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tagging\LinterTag.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)VSIdeAdapter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)VSOutputPaneDecorator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Properties\Strings.en-us.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.en-us.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Properties\Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Resources\LintExtensionResources.en-us.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LintExtensionResources.en-us.resx</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Properties\Strings.ru-ru.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.ru-ru.resx</DependentUpon>
+      <MergeWithCTO>True</MergeWithCTO>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\LintExtensionResources.en-us.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>LintExtensionResources.en-us.Designer.cs</LastGenOutput>
+      <MergeWithCTO>True</MergeWithCTO>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Properties\Strings.en-us.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.en-us.Designer.cs</LastGenOutput>
+      <MergeWithCTO>True</MergeWithCTO>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Properties\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <MergeWithCTO>True</MergeWithCTO>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Properties\Strings.ru-ru.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.ru-ru.Designer.cs</LastGenOutput>
+      <MergeWithCTO>True</MergeWithCTO>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)VSPackage.en-us.resx">
+      <ManifestResourceName>VSPackage</ManifestResourceName>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <OutputType>Library</OutputType>
+    <MinimumVisualStudioVersion>17.12</MinimumVisualStudioVersion>
+    <VSToolsPath Condition="!Exists('$(VSToolsPath)')">$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <UseCodebase>true</UseCodebase>
+    <IsPackable>false</IsPackable>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+    <ContinuousIntegrationBuild Condition=" '$(ContinuousIntegrationBuild)' == '' ">false</ContinuousIntegrationBuild>
+    <NoWarn Condition="'$(ContinuousIntegrationBuild)' == 'true'">$(NoWarn);VSTHRD010</NoWarn>
+    <Deterministic>true</Deterministic>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <ResourceLanguages>en</ResourceLanguages>
+    <LangVersion>latest</LangVersion>
+    <UICulture>en-US</UICulture>
+    <SharedFolder>..\TeamTools.Linter.VsExtension\</SharedFolder>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectTypeGuids>{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{D2DBF5A7-83E5-4D41-857E-DB01BE3FDE4E}</ProjectGuid>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TeamTools.VisualStudio.SqlExtension</RootNamespace>
+    <AssemblyName>TeamTools.Linter.VsExtension2022</AssemblyName>
+    <RuntimeIdentifier>win</RuntimeIdentifier>
+    <GeneratePkgDefFile>true</GeneratePkgDefFile>
+    <IncludeAssemblyInVSIXContainer>true</IncludeAssemblyInVSIXContainer>
+    <IncludeDebugSymbolsInVSIXContainer>true</IncludeDebugSymbolsInVSIXContainer>
+    <IncludeDebugSymbolsInLocalVSIXDeployment>true</IncludeDebugSymbolsInLocalVSIXDeployment>
+    <CopyBuildOutputToOutputDirectory>true</CopyBuildOutputToOutputDirectory>
+    <CopyOutputSymbolsToOutputDirectory>false</CopyOutputSymbolsToOutputDirectory>
+    <StartAction>Program</StartAction>
+    <StartProgram Condition="'$(DevEnvDir)' != ''">$(DevEnvDir)devenv.exe</StartProgram>
+    <StartArguments>/rootsuffix testing2022</StartArguments>
+    <VSSDKTargetPlatformRegRootSuffix Condition="'$(VSSDKTargetPlatformRegRootSuffix)' == ''">testing2022</VSSDKTargetPlatformRegRootSuffix>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DeployExtension Condition="'$(ContinuousIntegrationBuild)' == 'false'">True</DeployExtension>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DeployExtension>False</DeployExtension>
+    <CreateVsixContainer>True</CreateVsixContainer>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="packages.lock.json" />
+    <None Include="source.extension.vsixmanifest">
+      <SubType>Designer</SubType>
+    </None>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="$(SharedFolder)Resources\Lint.png" />
+    <Content Include="$(SharedFolder)Resources\LintPackage.ico" />
+    <Content Include="$(SharedFolder)stylesheet.css" />
+    <Content Include="$(SharedFolder)Resources\DefaultConfig.json">
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <VsixSubPath>Resources</VsixSubPath>
+    </Content>
+    <Page Include="$(SharedFolder)Linting\RuleTooltipControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="$(SharedFolder)Linting\RuleTooltipControl.xaml.cs">
+      <DependentUpon>RuleTooltipControl.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <VSCTCompile Include="$(SharedFolder)LintPackage.ru-ru.vsct">
+      <ResourceName>Menus.ctmenu</ResourceName>
+      <SubType>Designer</SubType>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <MergeWithCTO>True</MergeWithCTO>
+    </VSCTCompile>
+    <VSCTCompile Include="$(SharedFolder)LintPackage.en-us.vsct">
+      <ResourceName>Menus.ctmenu</ResourceName>
+      <AutoGen>True</AutoGen>
+      <SubType>Designer</SubType>
+      <DesignTime>True</DesignTime>
+      <MergeWithCTO>True</MergeWithCTO>
+    </VSCTCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="netstandard" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MessagePack">
+      <Version>3.1.4</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.ServiceHub.Framework">
+      <Version>4.8.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.SDK">
+      <Version>[17.10,17.13)</Version>
+      <IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Build.Tasks.Core">
+      <Version>17.14.8</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis">
+      <Version>4.14.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers">
+      <Version>4.14.0</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CSharp">
+      <Version>4.7.0</Version>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Net.Compilers.Toolset">
+      <Version>4.14.0</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.ServiceHub.Resources">
+      <Version>4.6.2052</Version>
+      <ExcludeAssets>All</ExcludeAssets>
+      <IncludeAssets>none</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.ComponentModelHost">
+      <Version>[17.10,17.13)</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Validation">
+      <Version>[17.8.8,17.13)</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VSSDK.BuildTools">
+      <Version>[17.10,17.13)</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.4</Version>
+    </PackageReference>
+    <PackageReference Include="System.Buffers">
+      <Version>4.6.1</Version>
+    </PackageReference>
+    <PackageReference Include="System.ComponentModel.Composition">
+      <Version>9.0.5</Version>
+    </PackageReference>
+    <PackageReference Include="System.Reflection">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Resources.Extensions">
+      <Version>9.0.5</Version>
+    </PackageReference>
+    <PackageReference Include="System.Runtime.Serialization.Json">
+      <Version>4.3.0</Version>
+    </PackageReference>
+    <PackageReference Include="System.Text.Json">
+      <Version>9.0.5</Version>
+    </PackageReference>
+    <PackageReference Include="TeamTools.Common.Linting">
+      <Version>1.*</Version>
+    </PackageReference>
+    <PackageReference Include="TeamTools.TSQL.ExpressionEvaluator">
+      <Version>1.*</Version>
+    </PackageReference>
+    <PackageReference Include="TeamTools.TSQL.Linter" GeneratePathProperty="true">
+      <Version>1.*</Version>
+      <!-- TODO : Transitive dependencies should be delivered to each plugin dedicated folder -->
+      <VSIXSubPath>Resources\Plugins\TSQLLinter</VSIXSubPath>
+    </PackageReference>
+    <PackageReference Include="TeamTools.SSDT.ProjectValidator" GeneratePathProperty="true">
+      <Version>1.*</Version>
+      <VSIXSubPath>Resources\Plugins\SSDTLinter</VSIXSubPath>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TeamTools.TSQL.Assistant\TeamTools.TSQL.Assistant.csproj">
+      <Project>{08e3f506-d9ef-4bea-bfab-29321952f6b1}</Project>
+      <Name>TeamTools.TSQL.Assistant</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3bDocumentationProjectOutputGroup%3bReferenceCopyLocalPathsOutputGroup%3bVSIXContainerProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
+      <Private>False</Private>
+      <VSIXSubPath>Resources\Plugins\Assistant</VSIXSubPath>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <!-- TODO : refactoring needed -->
+    <Content Include="$(PkgTeamTools_TSQL_Linter)\content\**\*.*">
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <Link>Resources\Plugins\TSQLLinter\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Visible>false</Visible>
+    </Content>
+    <Content Include="$(PkgTeamTools_StructuredFiles_Linter)\content\**\*.*">
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <Link>Resources\Plugins\StructuredFilesLinter\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Visible>false</Visible>
+    </Content>
+    <Content Include="$(PkgTeamTools_SSDT_ProjectValidator)\content\**\*.*">
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <Link>Resources\Plugins\SSDTLinter\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Visible>false</Visible>
+    </Content>
+    <Content Include="..\LICENSE">
+      <IncludeInVSIX>true</IncludeInVSIX>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Visible>false</Visible>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(SharedFolder)TeamTools.Linter.VsExtension.projitems" Label="Shared" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="Exists('$(VSToolsPath)')" />
+  <Target Name="IncludeNuGetPackageReferences" AfterTargets="GetVsixSourceItems">
+    <ItemGroup>
+      <VSIXSourceItem Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.NuGetPackageId)' == 'Microsoft.VisualStudio.Threading'" />
+      <VSIXSourceItem Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.NuGetPackageId)' == 'Newtonsoft.Json'" />
+      <VSIXSourceItem Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.NuGetPackageId)' == 'TeamTools.TSQL.Linter'">
+        <VSIXSubPath>Resources\Plugins\TSQLLinter</VSIXSubPath>
+      </VSIXSourceItem>
+      <VSIXSourceItem Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.NuGetPackageId)' == 'TeamTools.SSDT.ProjectValidator'">
+        <VSIXSubPath>Resources\Plugins\SSDTLinter</VSIXSubPath>
+      </VSIXSourceItem>
+      <VSIXSourceItem Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.NuGetPackageId)' == 'TeamTools.StructuredFiles.Linter'">
+        <VSIXSubPath>Resources\Plugins\StructuredFilesLinter</VSIXSubPath>
+      </VSIXSourceItem>
+    </ItemGroup>
+  </Target>
+  <Target Name="RemoveSatelliteAssemblies" AfterTargets="ResolveAssemblyReferences">
+    <ItemGroup>
+      <ReferenceCopyLocalPaths Remove="@(ReferenceSatellitePaths)" />
+    </ItemGroup>
+  </Target>
+</Project>

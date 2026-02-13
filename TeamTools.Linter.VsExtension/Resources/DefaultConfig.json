@@ -1,0 +1,47 @@
+﻿{
+    "plugins": {
+        "SSDT": {
+            "dll": "./Plugins/SSDTLinter/TeamTools.SSDT.ProjectValidator.dll",
+            "config": "./Plugins/SSDTLinter/DefaultConfig.json",
+            "docsBasePath": "./Plugins/SSDTLinter/Resources/Docs",
+            "docsBaseUrl": "https://github.com/IVNSTN/TeamTools.Linter.SSDT/tree/main/TeamTools.SSDT.ProjectValidator/Resources/Docs"
+        },
+        "TSQL": {
+            "dll": "./Plugins/TSQLLinter/TeamTools.TSQL.Linter.dll",
+            "config": "./Plugins/TSQLLinter/DefaultConfig.json",
+            "docsBasePath": "./Plugins/TSQLLinter/Resources/Docs",
+            "docsBaseUrl": "https://github.com/IVNSTN/TeamTools.Linter.TSQL/tree/main/TeamTools.TSQL.Linter/Resources/Docs"
+        }
+    },
+    "ignore": {
+        "folders": [
+            ".git",
+            ".vs",
+            ".stylecop",
+            "bin",
+            "obj",
+            "Framework",
+            "TestResults",
+            "TestSources",
+            "node_packages",
+            "packages"
+        ],
+        "extensions": [
+            ".dll",
+            ".orig",
+            ".exe",
+            ".user",
+            ".local",
+            ".dbmdl",
+            ".jfm",
+            ".dacpac",
+            ".rar",
+            ".zip",
+            ".7z"
+        ]
+    },
+    "ui": {
+        "fallbackLanguage": "en",
+        "docsBaseUri": "https://github.com/IVNSTN/TeamTools.Linter.VSIX/tree/main/TeamTools.Linter.VsExtension/Resources/Docs"
+    }
+}

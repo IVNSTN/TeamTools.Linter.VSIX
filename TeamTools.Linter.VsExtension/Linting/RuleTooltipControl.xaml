@@ -1,0 +1,98 @@
+﻿<UserControl
+    x:Class="TeamTools.VisualStudio.SqlExtension.Linting.RuleTooltipControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:catalog="clr-namespace:Microsoft.VisualStudio.Imaging;assembly=Microsoft.VisualStudio.ImageCatalog"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:imaging="clr-namespace:Microsoft.VisualStudio.Imaging;assembly=Microsoft.VisualStudio.Imaging"
+    xmlns:local="clr-namespace:TeamTools.VisualStudio.SqlExtension.Linting"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:theming="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Imaging"
+    xmlns:utilities="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Utilities"
+    xmlns:prop="clr-namespace:TeamTools.VisualStudio.SqlExtension.Properties"
+    xmlns:ui="clr-namespace:Microsoft.VisualStudio.PlatformUI;assembly=Microsoft.VisualStudio.Imaging"
+    d:DesignHeight="200"
+    d:DesignWidth="300"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <utilities:BrushToColorConverter x:Key="BrushToColorConverter" />
+            <Style x:Key="RuleIdStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Padding" Value="5,0,5,0" />
+                <Setter Property="Foreground" Value="{DynamicResource TextFontColor}" />
+            </Style>
+            <Style x:Key="RuleDescrTextStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="{DynamicResource TextFontColor}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Padding" Value="0,0,0,0" />
+            </Style>
+            <Style x:Key="HyperlinkStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="{DynamicResource HyperlinkFontColor}" />
+                <Setter Property="TextBlock.TextDecorations" Value="None" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <StackPanel Orientation="Vertical" VerticalAlignment="Top" MaxWidth="600">
+        <StackPanel Margin="0,0,0,5" Orientation="Horizontal" Background="Transparent">
+            <StackPanel VerticalAlignment="Center" theming:ImageThemingUtilities.ImageBackgroundColor="{Binding Background, RelativeSource={RelativeSource Self}, Converter={StaticResource BrushToColorConverter}}" Background="Transparent">
+                <imaging:CrispImage Moniker="{Binding Path=icon}" Visibility="Visible" />
+            </StackPanel>
+            <TextBlock Visibility="{Binding Path=docsLinkVisibility}" Style="{DynamicResource RuleIdStyle}">
+                <Hyperlink Name="DocsLink"  Click="DocsLink_Click" NavigateUri="{Binding Path=link}" TextDecorations="None">
+                    <TextBlock
+                        Language="en-us"
+                        Text="{Binding Path=ruleId}"
+                        d:Text="FA0128"
+                        Style="{DynamicResource HyperlinkStyle}" />
+                </Hyperlink>
+            </TextBlock>
+            <TextBlock 
+                Style="{DynamicResource RuleDescrTextStyle}" 
+                Text="{Binding Path=message}"
+                d:Text="Sample rule violation message" />
+        </StackPanel>
+        <TextBlock
+            TextWrapping="Wrap"
+            Height="Auto"
+            Text="{Binding Path=explanation}"
+            d:Text="Verbose and helpful rule violation reason explanation"
+            Style="{DynamicResource RuleDescrTextStyle}" />
+        <ItemsControl
+            Margin="0,0,0,0"
+            Padding="5,5,5,0"
+            FontSize="14"
+            ItemsSource="{Binding Path=takeAttention}"
+            Visibility="{Binding Path=takeAttentionVisibility, TargetNullValue=Collapsed}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel theming:ImageThemingUtilities.ImageBackgroundColor="{Binding Background, RelativeSource={RelativeSource Self}, Converter={StaticResource BrushToColorConverter}}" Orientation="Horizontal">
+                        <imaging:CrispImage
+                            VerticalAlignment="Top"
+                            Moniker="{x:Static catalog:KnownMonikers.IntellisenseLightBulb}"
+                            Visibility="Visible" />
+                        <TextBlock
+                            Height="Auto"
+                            MaxWidth="500"
+                            Padding="5,0,0,5"
+                            FontSize="12"
+                            Text="{Binding}"
+                            d:Text="Tips"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!--This is the file that defines the IDs for all the commands exposed by VisualStudio. -->
+  <Extern href="stdidcmd.h"/>
+
+  <!--This header contains the command ids for the menus provided by the shell. -->
+  <Extern href="vsshlids.h"/>
+
+  <!--The Commands section is where commands, menus, and menu groups are defined.
+      This section uses a Guid to identify the package that provides the command defined inside it. -->
+  <Commands package="guidLintPackage">
+    <!-- Inside this section we have different sub-sections: one for the menus, another
+    for the menu groups, one for the buttons (the actual commands), one for the combos
+    and the last one for the bitmaps used. Each element is identified by a command id that
+    is a unique pair of guid and numeric identifier; the guid part of the identifier is usually
+    called "command set" and is used to group different command inside a logically related
+    group; your package should define its own command set in order to avoid collisions
+    with command ids defined by other packages. -->
+
+    <!-- In this section you can define new menu groups. A menu group is a container for
+         other menus or buttons (commands); from a visual point of view you can see the
+         group as the part of a menu contained between two lines. The parent of a group
+         must be a menu. -->
+    <Groups>
+      <Group guid="guidLintCmdSetProject" id="MyMenuGroupProject" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_PROJNODE"/>
+      </Group>
+      <Group guid="guidLintCmdSetFile" id="MyMenuGroupFile" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE"/>
+      </Group>
+      <Group guid="guidLintCmdSetFolder" id="MyMenuGroupFolder" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_FOLDERNODE"/>
+      </Group>
+      <Group guid="guidLintCmdSetTab" id="MyMenuGroupTab" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_EZDOCWINTAB"/>
+      </Group>
+    </Groups>
+
+
+   <Buttons>
+      <!--To define a menu group you have to specify its ID, the parent menu and its display priority.
+          The command is visible and enabled by default. If you need to change the visibility, status, etc, you can use
+          the CommandFlag node.
+          You can add more than one CommandFlag node e.g.:
+              <CommandFlag>DefaultInvisible</CommandFlag>
+              <CommandFlag>DynamicVisibility</CommandFlag>
+          If you do not want an image next to your command, remove the Icon node /> -->
+      <Button guid="guidLintCmdSetProject" id="CommandIdProject" priority="0x0100" type="Button">
+        <Parent guid="guidLintCmdSetProject" id="MyMenuGroupProject" />
+        <Icon guid="guidImages" id="bmpPic1" />
+        <Strings>
+          <ButtonText>Линтить изменённые файлы проекта</ButtonText>
+        </Strings>
+      </Button>
+
+       <Button guid="guidLintCmdSetFolder" id="CommandIdFolder" priority="0x0100" type="Button">
+           <Parent guid="guidLintCmdSetFolder" id="MyMenuGroupFolder" />
+           <Icon guid="guidImages" id="bmpPic1" />
+           <Strings>
+               <ButtonText>Линтить все файлы в этой папке</ButtonText>
+           </Strings>
+       </Button>
+      
+      <Button guid="guidLintCmdSetFile" id="CommandIdFile" priority="0x0100" type="Button">
+        <Parent guid="guidLintCmdSetFile" id="MyMenuGroupFile" />
+        <Icon guid="guidImages" id="bmpPic1" />
+        <Strings>
+          <ButtonText>Линтить файл</ButtonText>
+        </Strings>
+      </Button>
+
+      <Button guid="guidLintCmdSetTab" id="CommandIdFileTab" priority="0x0100" type="Button">
+        <Parent guid="guidLintCmdSetTab" id="MyMenuGroupTab" />
+        <Icon guid="guidImages" id="bmpPic1" />
+        <Strings>
+          <ButtonText>Линтить файл</ButtonText>
+        </Strings>
+      </Button>
+
+       <Button guid="guidLintCmdSetTab" id="CommandIdSpellingHelper" priority="0x0200" type="Button">
+           <Parent guid="guidLintCmdSetTab" id="MyMenuGroupTab" />
+           <Icon guid="guidImages" id="bmpPic1" />
+           <Strings>
+             <ButtonText>Расставить BEGIN-END и подправить написание ключевых слов</ButtonText>
+           </Strings>
+       </Button>
+
+   </Buttons>
+
+    <Bitmaps>
+      <Bitmap guid="guidImages" href="Resources\Lint.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough"/>
+    </Bitmaps>
+  </Commands>
+
+  <Symbols>
+    <!-- This is the package guid. -->
+    <GuidSymbol name="guidLintPackage" value="{83202475-351d-41bb-a06c-2f541ec39b1d}" />
+
+    <!-- This is the guid used to group the menu commands together -->
+    <GuidSymbol name="guidLintCmdSetProject" value="{c5fe6472-33f3-40e4-b201-8a8b76cb3b81}">
+      <IDSymbol name="MyMenuGroupProject" value="0x1020" />
+      <IDSymbol name="CommandIdProject" value="0x0100" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidLintCmdSetFolder" value="{230501BA-B459-4CC5-8FDA-245D0015CAC4}">
+      <IDSymbol name="MyMenuGroupFolder" value="0x1030" />
+      <IDSymbol name="CommandIdFolder" value="0x0500" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidLintCmdSetFile" value="{230501BA-B459-4CC5-8FDA-245D0015CAC3}">
+      <IDSymbol name="MyMenuGroupFile" value="0x2020" />
+      <IDSymbol name="CommandIdFile" value="0x0200" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidLintCmdSetTab" value="{230CDDC9-A01E-484C-B4A3-170910687A82}">
+      <IDSymbol name="MyMenuGroupTab" value="0x1020" />
+      <IDSymbol name="CommandIdFileTab" value="0x0300" />
+      <IDSymbol name="CommandIdSpellingHelper" value="0x0400" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidImages" value="{8df099db-1811-49ec-9fd2-79f6152e26f0}" >
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+  </Symbols>
+  
+  <KeyBindings>
+    <KeyBinding guid="guidLintCmdSetTab" id="CommandIdSpellingHelper" editor="guidVSStd97" key1="B" key2="E" mod1="Control" mod2="Control"></KeyBinding>
+  </KeyBindings>
+</CommandTable>

@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "TeamTools.Linter.VsExtension", "TeamTools.Linter.VsExtension\TeamTools.Linter.VsExtension.shproj", "{B08C9355-3200-4CC3-BA92-01F0E8AC6669}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamTools.TSQL.Assistant", "TeamTools.TSQL.Assistant\TeamTools.TSQL.Assistant.csproj", "{A5083AD5-3D58-4E92-8700-5BF304CAF681}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamTools.TSQL.AssistantTests", "TeamTools.TSQL.AssistantTests\TeamTools.TSQL.AssistantTests.csproj", "{AAB937F6-23D4-4804-BD42-82AE513E1C70}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamTools.Linter.VsExtensionTests", "TeamTools.Linter.VsExtensionTests\TeamTools.Linter.VsExtensionTests.csproj", "{718FF286-A068-4C6F-A0D8-1A479AD8514D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamTools.Linter.VsExtension2019", "TeamTools.Linter.VsExtension2019\TeamTools.Linter.VsExtension2019.csproj", "{A3F3E797-8CAC-4FAD-860D-76AFBFAF831D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TeamTools.Linter.VsExtension2022", "TeamTools.Linter.VsExtension2022\TeamTools.Linter.VsExtension2022.csproj", "{D2DBF5A7-83E5-4D41-857E-DB01BE3FDE4E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		ReleaseVSIX|Any CPU = ReleaseVSIX|Any CPU
+		ReleaseVSIX2022|Any CPU = ReleaseVSIX2022|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5083AD5-3D58-4E92-8700-5BF304CAF681}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5083AD5-3D58-4E92-8700-5BF304CAF681}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5083AD5-3D58-4E92-8700-5BF304CAF681}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5083AD5-3D58-4E92-8700-5BF304CAF681}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5083AD5-3D58-4E92-8700-5BF304CAF681}.ReleaseVSIX|Any CPU.ActiveCfg = Release|Any CPU
+		{A5083AD5-3D58-4E92-8700-5BF304CAF681}.ReleaseVSIX|Any CPU.Build.0 = Release|Any CPU
+		{A5083AD5-3D58-4E92-8700-5BF304CAF681}.ReleaseVSIX2022|Any CPU.ActiveCfg = Release|Any CPU
+		{A5083AD5-3D58-4E92-8700-5BF304CAF681}.ReleaseVSIX2022|Any CPU.Build.0 = Release|Any CPU
+		{AAB937F6-23D4-4804-BD42-82AE513E1C70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAB937F6-23D4-4804-BD42-82AE513E1C70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAB937F6-23D4-4804-BD42-82AE513E1C70}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAB937F6-23D4-4804-BD42-82AE513E1C70}.ReleaseVSIX|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAB937F6-23D4-4804-BD42-82AE513E1C70}.ReleaseVSIX2022|Any CPU.ActiveCfg = Debug|Any CPU
+		{718FF286-A068-4C6F-A0D8-1A479AD8514D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{718FF286-A068-4C6F-A0D8-1A479AD8514D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{718FF286-A068-4C6F-A0D8-1A479AD8514D}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{718FF286-A068-4C6F-A0D8-1A479AD8514D}.ReleaseVSIX|Any CPU.ActiveCfg = Debug|Any CPU
+		{718FF286-A068-4C6F-A0D8-1A479AD8514D}.ReleaseVSIX2022|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3F3E797-8CAC-4FAD-860D-76AFBFAF831D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3F3E797-8CAC-4FAD-860D-76AFBFAF831D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3F3E797-8CAC-4FAD-860D-76AFBFAF831D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3F3E797-8CAC-4FAD-860D-76AFBFAF831D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3F3E797-8CAC-4FAD-860D-76AFBFAF831D}.ReleaseVSIX|Any CPU.ActiveCfg = Release|Any CPU
+		{A3F3E797-8CAC-4FAD-860D-76AFBFAF831D}.ReleaseVSIX|Any CPU.Build.0 = Release|Any CPU
+		{A3F3E797-8CAC-4FAD-860D-76AFBFAF831D}.ReleaseVSIX2022|Any CPU.ActiveCfg = Release|Any CPU
+		{D2DBF5A7-83E5-4D41-857E-DB01BE3FDE4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2DBF5A7-83E5-4D41-857E-DB01BE3FDE4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2DBF5A7-83E5-4D41-857E-DB01BE3FDE4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2DBF5A7-83E5-4D41-857E-DB01BE3FDE4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2DBF5A7-83E5-4D41-857E-DB01BE3FDE4E}.ReleaseVSIX|Any CPU.ActiveCfg = Release|Any CPU
+		{D2DBF5A7-83E5-4D41-857E-DB01BE3FDE4E}.ReleaseVSIX2022|Any CPU.ActiveCfg = Release|Any CPU
+		{D2DBF5A7-83E5-4D41-857E-DB01BE3FDE4E}.ReleaseVSIX2022|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E06D5CD4-E162-4C45-B42C-3FD9C0550745}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		TeamTools.Linter.VsExtension\TeamTools.Linter.VsExtension.projitems*{a3f3e797-8cac-4fad-860d-76afbfaf831d}*SharedItemsImports = 4
+		TeamTools.Linter.VsExtension\TeamTools.Linter.VsExtension.projitems*{b08c9355-3200-4cc3-ba92-01f0e8ac6669}*SharedItemsImports = 13
+		TeamTools.Linter.VsExtension\TeamTools.Linter.VsExtension.projitems*{d2dbf5a7-83e5-4d41-857e-db01be3fde4e}*SharedItemsImports = 4
+	EndGlobalSection
+EndGlobal
