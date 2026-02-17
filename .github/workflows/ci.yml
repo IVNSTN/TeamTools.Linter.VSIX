@@ -1,0 +1,268 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: MSBuild
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: 'Branch to run on'
+        required: true
+        default: 'main'
+
+env:
+  SOLUTION_FILE_PATH: TeamTools.Linter.VsExtension.sln
+  BUILD_CONFIGURATION: Release
+  PRODUCT_NAME: TeamTools.Linter.VSIX
+  OUTPUT_PATH: ${{ github.workspace }}\.bin\
+  PUBLISH_PATH: ${{ github.workspace }}\.pub\
+  LOCAL_PACKAGES: ${{ github.workspace }}\local_packages\
+  VERSION_SUFFIX: ${{ vars.VSIX_MINOR_VERSION }}.${{ github.run_number }}
+  VERSION_VS_2019: 2019.${{ vars.VSIX_MINOR_VERSION }}.${{ github.run_number }}
+  VERSION_VS_2022: 2022.${{ vars.VSIX_MINOR_VERSION }}.${{ github.run_number }}
+
+jobs:
+  build:
+    runs-on: windows-latest
+    outputs:
+      build-result: ${{ steps.bundle-status.outputs.BUNDLE_STATUS }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup .NET CORE for tests
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 3.1.x
+
+    - name: Cache NuGet packages
+      uses: actions/cache@v4
+      with:
+        path: ${{ github.workspace }}/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json', '**/*.csproj', 'Directory.Build.props') }} # Unique key for the cache
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Grab TSQL plugin
+      uses: dawidd6/action-download-artifact@v11
+      with:
+        github_token: ${{secrets.GITHUB_TOKEN}}
+        repo: IVNSTN/TeamTools.Linter.TSQL
+        workflow: ci.yml
+        workflow_conclusion: completed
+        branch: main
+        name: nuget-packages
+        name_is_regexp: false
+        path: ${{ env.LOCAL_PACKAGES }}
+
+    - name: Grab SSDT plugin
+      uses: dawidd6/action-download-artifact@v11
+      with:
+        github_token: ${{secrets.GITHUB_TOKEN}}
+        repo: IVNSTN/TeamTools.Linter.SSDT
+        workflow: ci.yml
+        workflow_conclusion: completed
+        branch: main
+        name: nuget-packages
+        name_is_regexp: false
+        path: ${{ env.LOCAL_PACKAGES }}
+
+    - name: Restore NuGet packages
+      run: >
+        msbuild ${{env.SOLUTION_FILE_PATH}}
+        -t:Restore
+        -p:ContinuousIntegrationBuild=true
+        -p:Configuration=Debug
+        && msbuild ${{env.SOLUTION_FILE_PATH}}
+        -t:Restore
+        -p:ContinuousIntegrationBuild=true
+        -p:Configuration=${{env.BUILD_CONFIGURATION}}
+
+    - name: Install coverlet
+      run: |
+        dotnet add package coverlet.msbuild --version 6.0.4 &&
+        dotnet add package coverlet.collector --version 6.0.4
+      working-directory: TeamTools.Linter.VsExtensionTests
+
+    - name: Increment VSIX 2019 version
+      id: vsix_version_2019
+      uses: cezarypiatek/VsixVersionAction@1.1
+      with:
+        version: '${{ env.VERSION_VS_2019 }}'
+        vsix-manifest-file: TeamTools.Linter.VsExtension2019\source.extension.vsixmanifest
+
+    - name: Increment VSIX 2019 version
+      id: vsix_version_2022
+      uses: cezarypiatek/VsixVersionAction@1.1
+      with:
+        version: '${{ env.VERSION_VS_2022 }}'
+        vsix-manifest-file: TeamTools.Linter.VsExtension2022\source.extension.vsixmanifest
+
+    - name: Set AssemblyInfo Version 2019
+      id: update_assemblyinfo_2019
+      uses: vers-one/dotnet-project-version-updater@v1.7
+      with:
+        file: |
+            TeamTools.Linter.VsExtension2019\**\AssemblyInfo.cs
+        version: ${{ env.VERSION_VS_2019 }}
+
+    - name: Set AssemblyInfo Version 2022
+      id: update_assemblyinfo_2022
+      uses: vers-one/dotnet-project-version-updater@v1.7
+      with:
+        file: |
+            TeamTools.Linter.VsExtension2022\**\AssemblyInfo.cs
+        version: ${{ env.VERSION_VS_2022 }}
+
+    - name: Build for VS 2019
+      id: build_2019
+      run: >
+        msbuild TeamTools.Linter.VsExtension2019\TeamTools.Linter.VsExtension2019.csproj
+        -t:Build
+        -p:NoRestore=true
+        -p:Configuration=${{env.BUILD_CONFIGURATION}}
+        -p:DeployExtension=false
+        -p:ContinuousIntegrationBuild=true
+        -p:VersionPrefix=${{ env.VERSION_VS_2019 }}
+        -p:SourceRevisionId=${{ github.sha }}
+        -p:RepositoryUrl="${{ github.repositoryUrl }}"
+        -p:RepositoryType=git
+        -p:RepositoryBranch="${{ github.ref_name }}"
+        -p:BaseOutputPath="${{ env.OUTPUT_PATH }}"
+
+    - name: Build for VS 2022
+      id: build_2022
+      run: >
+        msbuild TeamTools.Linter.VsExtension2022\TeamTools.Linter.VsExtension2022.csproj
+        -t:Build
+        -p:NoRestore=true
+        -p:Configuration=${{env.BUILD_CONFIGURATION}}
+        -p:DeployExtension=false
+        -p:ContinuousIntegrationBuild=true
+        -p:VersionPrefix=${{ env.VERSION_VS_2022 }}
+        -p:SourceRevisionId=${{ github.sha }}
+        -p:RepositoryUrl="${{ github.repositoryUrl }}"
+        -p:RepositoryType=git
+        -p:RepositoryBranch="${{ github.ref_name }}"
+        -p:BaseOutputPath="${{ env.OUTPUT_PATH }}"
+
+    - name: Build for testing
+      id: build_test
+      run: >
+        msbuild ${{env.SOLUTION_FILE_PATH}}
+        -t:Build
+        -p:NoRestore=true
+        -p:Configuration=Debug
+        -p:DeployExtension=false
+        -p:ContinuousIntegrationBuild=true
+        -p:BaseOutputPath="${{ env.OUTPUT_PATH }}"
+
+    - name: Set bundle status
+      id: bundle-status
+      run: |
+        echo "BUNDLE_STATUS=${{ steps.build_test.conclusion }}" >> $GITHUB_OUTPUT
+
+    - name: Test with coverage
+      run: >
+        dotnet test --no-build --verbosity normal
+        -p:BaseOutputPath="${{ env.OUTPUT_PATH }}"
+        -p:CollectCoverage=true -p:CoverletOutput="${{ github.workspace }}/TestResults/" -p:CoverletOutputFormat=opencover
+        --configuration Debug
+        --logger "trx;LogFileName=${{ github.workspace }}/TestResults/test-results.trx"
+
+    - name: Upload VSIX 2019
+      uses: actions/upload-artifact@v4
+      with:
+        name: TeamTools.Linter.VsExtension-${{ env.VERSION_VS_2019 }}.vsix
+        path: TeamTools.Linter.VsExtension2019\bin\Release\TeamTools.Linter.VsExtension2019.vsix
+        if-no-files-found: error
+
+    - name: Upload VSIX 2022
+      uses: actions/upload-artifact@v4
+      with:
+        name: TeamTools.Linter.VsExtension-${{ env.VERSION_VS_2022 }}.vsix
+        path: TeamTools.Linter.VsExtension2022\bin\Release\TeamTools.Linter.VsExtension2022.vsix
+        if-no-files-found: error
+
+    - name: Upload test artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: TestResults
+        if-no-files-found: error
+
+  validate-markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+
+      - name: Install markdownlint
+        run: >
+          npm install markdownlint-cli2 --global
+
+      - name: Run linting
+        run: >
+          markdownlint-cli2
+          "**/*.md"
+          "!node_modules"
+          "!packages"
+          --config ${{ github.workspace }}/.markdownlint.jsonc
+
+
+  report:
+    needs: [build, validate-markdown]
+    if: always()
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download test results
+        uses: actions/download-artifact@v4
+        with:
+          name: test-results
+          path: TestResults
+
+      - name: Extract coverage info
+        uses: simon-k/dotnet-code-coverage-badge@v1.0.0
+        id: create_coverage_badge
+        if: ${{ !cancelled() && hashFiles('TestResults/coverage.opencover.xml') != '' }}
+        with:
+          label: Unit Test Coverage
+          color: brightgreen
+          path: TestResults/coverage.opencover.xml
+          gist-filename: code-coverage.json
+          gist-id: ${{ vars.GIST_COVERAGE_ID }}
+          gist-auth-token: ${{ secrets.GIST_AUTH_TOKEN }}
+
+      - name: Create Coverage Badge
+        uses: schneegans/dynamic-badges-action@v1.7.0
+        if: ${{ !cancelled() && hashFiles('TestResults/coverage.opencover.xml') != '' && steps.create_coverage_badge.outputs.percentage != '' }}
+        with:
+          auth: ${{ secrets.GIST_AUTH_TOKEN }}
+          gistID: ${{ vars.GIST_COVERAGE_ID }}
+          filename: code-coverage.svg
+          label: Coverage
+          message: ${{ steps.create_coverage_badge.outputs.percentage }}%
+          valColorRange: ${{ steps.create_coverage_badge.outputs.percentage }}
+          maxColorRange: 100
+          minColorRange: 0
+
+      - name: Print code coverage
+        if: steps.create_coverage_badge.outcome == 'success'
+        run: echo "Code coverage percentage ${{steps.create_coverage_badge.outputs.percentage}}%"
