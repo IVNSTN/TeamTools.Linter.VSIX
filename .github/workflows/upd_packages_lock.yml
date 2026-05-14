@@ -1,0 +1,65 @@
+﻿name: Update Lockfile
+
+on:
+  push:
+    paths:
+      - '**/*.csproj'
+    branches-ignore: [ "main" ]
+
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: 'Branch to run on'
+        required: true
+        default: 'dev'
+
+env:
+  SOLUTION_FILE_PATH: TeamTools.Linter.VsExtension.sln
+  LOCAL_PACKAGES: ${{ github.workspace }}\local_packages\
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required to push the updated lockfile
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.x'
+
+    - name: Grab TSQL plugin
+      uses: dawidd6/action-download-artifact@v11
+      with:
+        github_token: ${{secrets.GITHUB_TOKEN}}
+        repo: IVNSTN/TeamTools.Linter.TSQL
+        workflow: ci.yml
+        workflow_conclusion: completed
+        branch: main
+        name: nuget-packages
+        name_is_regexp: false
+        path: ${{ env.LOCAL_PACKAGES }}
+
+    - name: Grab SSDT plugin
+      uses: dawidd6/action-download-artifact@v11
+      with:
+        github_token: ${{secrets.GITHUB_TOKEN}}
+        repo: IVNSTN/TeamTools.Linter.SSDT
+        workflow: ci.yml
+        workflow_conclusion: completed
+        branch: main
+        name: nuget-packages
+        name_is_regexp: false
+        path: ${{ env.LOCAL_PACKAGES }}
+
+    - name: Restore and update lock files
+      run: dotnet restore ${{env.SOLUTION_FILE_PATH}} --force-evaluate
+
+    - name: Commit updated lock files
+      uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: "chore: update packages.lock.json"
