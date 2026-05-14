@@ -15,7 +15,7 @@ on:
 
 env:
   SOLUTION_FILE_PATH: TeamTools.Linter.VsExtension.sln
-  LOCAL_PACKAGES: ${{ github.workspace }}\local_packages\
+  LOCAL_PACKAGES: ${{ github.workspace }}/local_packages/
 
 jobs:
   update:
