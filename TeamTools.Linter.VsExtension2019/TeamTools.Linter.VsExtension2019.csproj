@@ -125,7 +125,7 @@
       <Version>3.1.4</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Build.Tasks.Core">
-      <Version>17.11.31</Version>
+      <Version>17.11.48</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis">
       <Version>4.14.0</Version>
