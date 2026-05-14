@@ -19,9 +19,9 @@ env:
 
 jobs:
   update:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     permissions:
-      contents: write # Required to push the updated lockfile
+      contents: write
 
     steps:
     - name: Checkout repository
@@ -63,7 +63,7 @@ jobs:
         path: ${{ env.LOCAL_PACKAGES }}
 
     - name: Restore and update lock files
-      run: dotnet restore ${{env.SOLUTION_FILE_PATH}} --force-evaluate
+      run: dotnet msbuild ${{env.SOLUTION_FILE_PATH}} -t:Restore -p:RestoreForceEvaluate=true
 
     - name: Commit updated lock files
       uses: stefanzweifel/git-auto-commit-action@v5
