@@ -122,7 +122,7 @@
       <Version>[16.10.31320,17)</Version>
     </PackageReference>
     <PackageReference Include="MessagePack">
-      <Version>3.1.4</Version>
+      <Version>3.1.7</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Build.Tasks.Core">
       <Version>17.11.48</Version>
@@ -140,7 +140,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Primitives">
-      <Version>9.0.8</Version>
+      <Version>9.0.18</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Net.Compilers.Toolset">
       <Version>4.14.0</Version>
