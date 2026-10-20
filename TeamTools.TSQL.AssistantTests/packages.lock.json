@@ -176,8 +176,8 @@
       },
       "TeamTools.Common.Linting": {
         "type": "Transitive",
-        "resolved": "1.6.2414",
-        "contentHash": "cYLH2LNo3BDW1VfajNtbgY8yDLcxGU2pGvBa2PsGHj8MRE2TPvFObhyS3lHAJOH2IJezu1LFNJIFCSnj6Ij1SA==",
+        "resolved": "1.6.2415",
+        "contentHash": "YnJk/eIWd1uwKDBXcqzNm7Jk3e77cqg2F8GX1M93nEeVo0dgoDWB+Wr5T5s2O0Ap/17UmTa1WO257Fd04mfL9g==",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "7.0.4",
           "Newtonsoft.Json": "13.0.4"
