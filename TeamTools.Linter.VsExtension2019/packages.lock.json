@@ -640,8 +640,8 @@
       "TeamTools.Common.Linting": {
         "type": "Direct",
         "requested": "[1.*, )",
-        "resolved": "1.6.2414",
-        "contentHash": "cYLH2LNo3BDW1VfajNtbgY8yDLcxGU2pGvBa2PsGHj8MRE2TPvFObhyS3lHAJOH2IJezu1LFNJIFCSnj6Ij1SA==",
+        "resolved": "1.6.2415",
+        "contentHash": "YnJk/eIWd1uwKDBXcqzNm7Jk3e77cqg2F8GX1M93nEeVo0dgoDWB+Wr5T5s2O0Ap/17UmTa1WO257Fd04mfL9g==",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "7.0.4",
           "Newtonsoft.Json": "13.0.4"
@@ -651,7 +651,7 @@
         "type": "Direct",
         "requested": "[1.*, )",
         "resolved": "1.6.2413",
-        "contentHash": "nojyNej9GqPOlIwRQr0tn5OscYcuqaX++U8qjgxX30dOL0HpzdTb3v4LTClPlM7gHhssvWtdTpZcMat4fVS6dw==",
+        "contentHash": "vlMcKdoY5IRwLOLR6MgiKZCmSqtTcOWSoB1L7JD7i7O1KmNu1MHbkj4pi2xxV0XV3H8YSUG7xOJ/qR8s/YVDdQ==",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "7.0.4",
           "TeamTools.Common.Linting": "1.6.2413"
@@ -660,25 +660,25 @@
       "TeamTools.TSQL.ExpressionEvaluator": {
         "type": "Direct",
         "requested": "[1.*, )",
-        "resolved": "1.6.2414",
-        "contentHash": "z+LMm1q5mSVkPko7G8haKRdV1YXv1/6Gywq2VQZ+Lwmtz1mBtBq3uxBRXZkHl1Vx7WLAGnZEv/2pzmKp5prOTA==",
+        "resolved": "1.6.2415",
+        "contentHash": "5oEcK/JZe7AMuhx4GcAAks4xfkxc78ipQ9BSmKGfPNiB66H3DB5WWyyRiM3wTGXLjoU+QiBM1LkAmGd+nNaT6w==",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "7.0.4",
-          "Microsoft.SqlServer.TransactSql.ScriptDom": "170.128.0",
-          "TeamTools.Common.Linting": "1.6.2414"
+          "Microsoft.SqlServer.TransactSql.ScriptDom": "180.78.1",
+          "TeamTools.Common.Linting": "1.6.2415"
         }
       },
       "TeamTools.TSQL.Linter": {
         "type": "Direct",
         "requested": "[1.*, )",
-        "resolved": "1.6.2414",
-        "contentHash": "yscvvF1HqZUoJYBJjiggX9xKFcJDNbdBnsKCLVhfT7HilJ54nAgLWtRb2/0qN3f5RRGMBRZCrl1b6tgxbvXzZg==",
+        "resolved": "1.6.2415",
+        "contentHash": "nIGJPIG+tFKZGKBqL77Z755+zyKakfzqNQIsdIPVWCEWmIgN29iH/qx3q/L9pSHbuujnWEIIKnKvdRYeXuNw9Q==",
         "dependencies": {
           "Humanizer.Core": "2.14.1",
           "Microsoft.NETCore.Platforms": "7.0.4",
-          "Microsoft.SqlServer.TransactSql.ScriptDom": "170.128.0",
+          "Microsoft.SqlServer.TransactSql.ScriptDom": "180.78.1",
           "Newtonsoft.Json": "13.0.4",
-          "TeamTools.Common.Linting": "1.6.2414"
+          "TeamTools.Common.Linting": "1.6.2415"
         }
       },
       "Humanizer.Core": {
