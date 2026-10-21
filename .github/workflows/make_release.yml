@@ -1,0 +1,79 @@
+﻿
+name: Release
+
+on:
+
+  workflow_dispatch:
+    inputs:
+      target_branch:
+        description: 'Branch to run on'
+        required: true
+        default: 'main'
+env:
+  LOCAL_ARTIFACTS: ${{ github.workspace }}/local_artifacts
+
+jobs:
+
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      vsix-2019: ${{ steps.locate.outputs.VSIX_2019 }}
+      vsix-2022: ${{ steps.locate.outputs.VSIX_2022 }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Grab VSIX
+      uses: dawidd6/action-download-artifact@v11
+      with:
+        github_token: ${{secrets.GITHUB_TOKEN}}
+        workflow: ci.yml
+        workflow_conclusion: completed
+        branch: main
+        path: ${{ env.LOCAL_ARTIFACTS }}
+
+    - name: Detect versions
+      id: get-tag
+      run: |
+        ALL=$(jq -r '.ALL' ${{ env.LOCAL_ARTIFACTS }}/vsix-versions.json)
+        TAG=$(jq -r '.VS_2019' ${{ env.LOCAL_ARTIFACTS }}/vsix-versions.json)
+        echo "ALL_VERSIONS=$ALL" >> $GITHUB_OUTPUT
+        echo "TAG=v$TAG" >> $GITHUB_OUTPUT
+
+    - name: Create release
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "${{ env.LOCAL_ARTIFACTS }}/*.vsix"
+        generateReleaseNotes: true
+        draft: true
+        name: Release ${{ steps.get-tag.outputs.ALL}}
+        tag: ${{ steps.get-tag.outputs.TAG}}
+
+    - name: Locate VSIX binaries
+      id: locate
+      run: |
+        VSIX_2019 = $(find "${{ env.LOCAL_ARTIFACTS }}" -type f -iname "TeamTools*-2019*.vsix" | head -n 1)
+        VSIX_2022 = $(find "${{ env.LOCAL_ARTIFACTS }}" -type f -iname "TeamTools*-2022*.vsix" | head -n 1)
+
+        echo "VSIX_2019=$VSIX_2019" >> "$GITHUB_OUTPUT"
+        echo "VSIX_2022=$VSIX_2022" >> "$GITHUB_OUTPUT"
+
+  publish:
+
+    runs-on: ubuntu-latest
+    needs: prepare
+
+    steps:
+    - name: Publish VSIX 2019
+      uses: cezarypiatek/VsixPublisherAction@1.2
+      with:
+        extension-file: ${{ needs.prepare.outputs.vsix-2019 }}
+        publish-manifest-file: vsix_marketplace_publish_manifest.json
+        personal-access-code: ${{ secrets.VS_PUBLISHER_ACCESS_TOKEN }}
+
+    - name: Publish VSIX 2022
+      uses: cezarypiatek/VsixPublisherAction@1.2
+      with:
+        extension-file: ${{ needs.prepare.outputs.vsix-2022 }}
+        publish-manifest-file: vsix_marketplace_publish_manifest.json
+        personal-access-code: ${{ secrets.VS_PUBLISHER_ACCESS_TOKEN }}

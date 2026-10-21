@@ -30,6 +30,28 @@ env:
   VERSION_VS_2022: 2022.${{ vars.VSIX_MINOR_VERSION }}.${{ github.run_number }}
 
 jobs:
+  semver:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Make version info file
+      run: |
+        cat > vsix-versions.json << EOF
+        {
+          "VS_2019": "${{env.VERSION_VS_2019}}",
+          "VS_2022": "${{env.VERSION_VS_2022}}",
+          "ALL": "${{env.VERSION_VS_2019}}, ${{env.VERSION_VS_2022}}"
+        }
+        EOF
+
+    - name: Upload version info
+      uses: actions/upload-artifact@v4
+      with:
+        name: vsix-versions.json
+        path: ${{ github.workspace }}/vsix-versions.json
+        if-no-files-found: error
+
   build:
     runs-on: windows-latest
     outputs:
@@ -222,7 +244,6 @@ jobs:
           "!node_modules"
           "!packages"
           --config ${{ github.workspace }}/.markdownlint.jsonc
-
 
   report:
     needs: [build, validate-markdown]

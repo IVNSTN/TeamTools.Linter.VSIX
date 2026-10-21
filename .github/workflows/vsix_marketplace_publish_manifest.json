@@ -1,0 +1,30 @@
+﻿{
+    "$schema": "https://json.schemastore.org/vsix-publish",
+    "categories": [
+        "coding",
+        "tools",
+        "programming languages"
+    ],
+    "tags": [
+        "Code analysis",
+        "CodeAnalysis",
+        "Static code analysis",
+        "CodeSmell",
+        "T-SQL",
+        "TSQL",
+        "SSDT",
+        "Code Quality",
+        "VS2019",
+        "VS2022",
+        "VS2026"
+    ],
+    "identity": {
+        "internalName": "teamtoolslintervsix"
+    },
+    "overview": "../../README.md",
+    "priceCategory": "free",
+    "publisher": "IVNSTN",
+    "private": true,
+    "qna": true,
+    "repo": "https://github.com/IVNSTN/TeamTools.Linter.VSIX"
+}
