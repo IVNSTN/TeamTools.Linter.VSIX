@@ -52,12 +52,14 @@ jobs:
       id: locate
       run: |
         find '.' -type f -iname 'TeamTools*'
+        echo "==="
+        find '.' -type f -iname 'TeamTools*-*.vsix'
 
         VSIX_2019=$(find '.' -type f -iname 'TeamTools*-2019*.vsix' -print -quit)
         VSIX_2022=$(find '.' -type f -iname 'TeamTools*-2022*.vsix' -print -quit)
 
-        echo $VSIX_2019
-        echo $VSIX_2022
+        echo "Path for 2019 = $VSIX_2019"
+        echo "Path for 2022 = $VSIX_2022"
 
         echo "VSIX_2019=$VSIX_2019" >> $GITHUB_OUTPUT
         echo "VSIX_2022=$VSIX_2022" >> $GITHUB_OUTPUT
