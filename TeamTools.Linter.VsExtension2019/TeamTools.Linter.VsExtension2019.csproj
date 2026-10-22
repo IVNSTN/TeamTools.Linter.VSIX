@@ -122,7 +122,7 @@
       <Version>[16.10.31320,17)</Version>
     </PackageReference>
     <PackageReference Include="MessagePack">
-      <Version>3.1.7</Version>
+      <Version>3.1.12</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Build.Tasks.Core">
       <Version>17.11.48</Version>
