@@ -13,6 +13,8 @@ on:
         description: 'Branch to run on'
         required: true
         default: 'main'
+env:
+  LOCAL_ARTIFACTS: ${{ github.workspace }}\local_artifacts\
 
 jobs:
 
@@ -22,10 +24,23 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Grab VSIX
+    - name: Grab build artifacts
       uses: dawidd6/action-download-artifact@v11
       with:
         github_token: ${{secrets.GITHUB_TOKEN}}
+        name: TeamTools.*
+        name_is_regexp: true
+        workflow: ci.yml
+        workflow_conclusion: completed
+        branch: main
+        skip_unpack: true
+        path: ${{ env.LOCAL_ARTIFACTS }}
+
+    - name: Grab version artifact
+      uses: dawidd6/action-download-artifact@v11
+      with:
+        github_token: ${{secrets.GITHUB_TOKEN}}
+        name: vsix-version.json
         workflow: ci.yml
         workflow_conclusion: completed
         branch: main
@@ -33,8 +48,8 @@ jobs:
     - name: Detect versions
       id: get-tag
       run: |
-        ALL=$(jq -r '.ALL' 'vsix-versions.json/vsix-versions.json')
-        TAG=$(jq -r '.VS_2019' 'vsix-versions.json/vsix-versions.json')
+        ALL=$(jq -r '.ALL' 'vsix-versions.json')
+        TAG=$(jq -r '.VS_2019' 'vsix-versions.json')
         echo "ALL_VERSIONS=$ALL" >> $GITHUB_OUTPUT
         echo "TAG=v$TAG" >> $GITHUB_OUTPUT
       shell: bash
@@ -42,7 +57,7 @@ jobs:
     - name: Create release
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "*.vsix.zip"
+        artifacts: "${{ env.LOCAL_ARTIFACTS }}/*.zip"
         generateReleaseNotes: true
         draft: true
         name: Release ${{ steps.get-tag.outputs.ALL_VERSIONS}}
@@ -51,8 +66,8 @@ jobs:
     - name: Locate VSIX binaries
       id: locate
       run: |
-        VSIX_2019=$(find '.' -type f -iname 'TeamTools*2019.vsix' | head -n 1);
-        VSIX_2022=$(find '.' -type f -iname 'TeamTools*2022.vsix' | head -n 1);
+        VSIX_2019=$(find '${{ env.LOCAL_PACKAGES }}' -type f -iname 'TeamTools*2019.vsix' | head -n 1);
+        VSIX_2022=$(find '${{ env.LOCAL_PACKAGES }}' -type f -iname 'TeamTools*2022.vsix' | head -n 1);
 
         echo "Path for 2019 = $VSIX_2019"
         echo "Path for 2022 = $VSIX_2022"
