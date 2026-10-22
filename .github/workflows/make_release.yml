@@ -33,14 +33,13 @@ jobs:
         workflow: ci.yml
         workflow_conclusion: completed
         branch: main
-        skip_unpack: true
         path: ${{ env.LOCAL_ARTIFACTS }}
 
     - name: Grab version artifact
       uses: dawidd6/action-download-artifact@v11
       with:
         github_token: ${{secrets.GITHUB_TOKEN}}
-        name: vsix-version.json
+        name: vsix-versions.json
         workflow: ci.yml
         workflow_conclusion: completed
         branch: main
