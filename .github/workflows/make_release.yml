@@ -64,13 +64,13 @@ jobs:
     - name: Publish VSIX 2019
       uses: cezarypiatek/VsixPublisherAction@1.2
       with:
-        publish-manifest-file: vsix_marketplace_publish_manifest.json
+        publish-manifest-file: '${{ GITHUB.WORKSPACE }}/.github/workflows/vsix_marketplace_publish_manifest.json'
         personal-access-code: ${{ secrets.VS_PUBLISHER_ACCESS_TOKEN }}
         extension-file: '${{ steps.locate.outputs.VSIX_2019 }}'
 
     - name: Publish VSIX 2022
       uses: cezarypiatek/VsixPublisherAction@1.2
       with:
-        publish-manifest-file: vsix_marketplace_publish_manifest.json
+        publish-manifest-file: '${{ GITHUB.WORKSPACE }}/.github/workflows/vsix_marketplace_publish_manifest.json'
         personal-access-code: ${{ secrets.VS_PUBLISHER_ACCESS_TOKEN }}
         extension-file: ${{ steps.locate.outputs.VSIX_2022 }}
