@@ -42,7 +42,7 @@ jobs:
     - name: Create release
       uses: ncipollo/release-action@v1
       with:
-        artifacts: "*.vsix"
+        artifacts: "*.vsix.zip"
         generateReleaseNotes: true
         draft: true
         name: Release ${{ steps.get-tag.outputs.ALL_VERSIONS}}
@@ -51,13 +51,8 @@ jobs:
     - name: Locate VSIX binaries
       id: locate
       run: |
-        find '.' -type f -iname 'TeamTools*';
-        echo "==="
-        find '.' -type f -iname 'TeamTools*-*.vsix';
-        echo "==="
-
-        VSIX_2019=$(find '.' -type f -iname 'TeamTools*-2019*.vsix' | head -n 1);
-        VSIX_2022=$(find '.' -type f -iname 'TeamTools*-2022*.vsix' -print -quit);
+        VSIX_2019=$(find '.' -type f -iname 'TeamTools*2019.vsix' | head -n 1);
+        VSIX_2022=$(find '.' -type f -iname 'TeamTools*2022.vsix' | head -n 1);
 
         echo "Path for 2019 = $VSIX_2019"
         echo "Path for 2022 = $VSIX_2022"
