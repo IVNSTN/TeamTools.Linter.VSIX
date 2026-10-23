@@ -4,12 +4,12 @@
     ".NETFramework,Version=v4.7.2": {
       "MessagePack": {
         "type": "Direct",
-        "requested": "[3.1.7, )",
-        "resolved": "3.1.7",
-        "contentHash": "gXpifaxbhfBqh8bVToQn9j+OgCnhXWMbRCV7RQIbCVa9CNJG1fY6oHAYYl+ER3Tb9uUIHiQ5QbGiGwwFhoagbA==",
+        "requested": "[3.1.12, )",
+        "resolved": "3.1.12",
+        "contentHash": "m1QEsd59gUj82ji5tEQbZiyjV6y0F7cYfGVhil6pAlNZpyzR7ze9TucMu4lPpi8cZAV8aNl3D9/T9J1HbFz15Q==",
         "dependencies": {
-          "MessagePack.Annotations": "3.1.7",
-          "MessagePackAnalyzer": "3.1.7",
+          "MessagePack.Annotations": "3.1.12",
+          "MessagePackAnalyzer": "3.1.12",
           "Microsoft.Bcl.AsyncInterfaces": "8.0.0",
           "Microsoft.NET.StringTools": "17.11.4",
           "System.Collections.Immutable": "8.0.0",
@@ -336,8 +336,8 @@
       "TeamTools.Common.Linting": {
         "type": "Direct",
         "requested": "[1.*, )",
-        "resolved": "1.6.2415",
-        "contentHash": "YnJk/eIWd1uwKDBXcqzNm7Jk3e77cqg2F8GX1M93nEeVo0dgoDWB+Wr5T5s2O0Ap/17UmTa1WO257Fd04mfL9g==",
+        "resolved": "1.6.2416",
+        "contentHash": "xNXpN/dKGqGmCyB6t1ndbJ4J0O6klt69PyaAMHz/rz++EAQW99vOPbNpvrTYxdp9gX9Df2IcuXRxqOEL4Rs+YQ==",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "7.0.4",
           "Newtonsoft.Json": "13.0.4"
@@ -346,35 +346,35 @@
       "TeamTools.SSDT.ProjectValidator": {
         "type": "Direct",
         "requested": "[1.*, )",
-        "resolved": "1.6.2413",
-        "contentHash": "vlMcKdoY5IRwLOLR6MgiKZCmSqtTcOWSoB1L7JD7i7O1KmNu1MHbkj4pi2xxV0XV3H8YSUG7xOJ/qR8s/YVDdQ==",
+        "resolved": "1.6.2414",
+        "contentHash": "Y6kn8ifSsAtxdxmL+gh6A8hqsOLT8gIOMPAso/avI8GHQeCaHvstQDdeql+BhSODiojeFKnGaQWK2qVJKjREFA==",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "7.0.4",
-          "TeamTools.Common.Linting": "1.6.2413"
+          "TeamTools.Common.Linting": "1.6.2414"
         }
       },
       "TeamTools.TSQL.ExpressionEvaluator": {
         "type": "Direct",
         "requested": "[1.*, )",
-        "resolved": "1.6.2415",
-        "contentHash": "5oEcK/JZe7AMuhx4GcAAks4xfkxc78ipQ9BSmKGfPNiB66H3DB5WWyyRiM3wTGXLjoU+QiBM1LkAmGd+nNaT6w==",
+        "resolved": "1.6.2416",
+        "contentHash": "D8Fkw8hybS0F29cPJEvJnAohFtj1gOxBAO5GgmfWgnpT3CgsHWhGKtQQ3QrxgchRSmNOn2vMErp7LyfUc72UHA==",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "7.0.4",
           "Microsoft.SqlServer.TransactSql.ScriptDom": "180.78.1",
-          "TeamTools.Common.Linting": "1.6.2415"
+          "TeamTools.Common.Linting": "1.6.2416"
         }
       },
       "TeamTools.TSQL.Linter": {
         "type": "Direct",
         "requested": "[1.*, )",
-        "resolved": "1.6.2415",
-        "contentHash": "nIGJPIG+tFKZGKBqL77Z755+zyKakfzqNQIsdIPVWCEWmIgN29iH/qx3q/L9pSHbuujnWEIIKnKvdRYeXuNw9Q==",
+        "resolved": "1.6.2416",
+        "contentHash": "LM7WXVZat8y6YfWGAh7isVNxNiYfUiDzGt84m+rresTKm1MBuzARNJGEwrxbgz982Ml1UArOM2gsVGn4FNH75A==",
         "dependencies": {
           "Humanizer.Core": "2.14.1",
           "Microsoft.NETCore.Platforms": "7.0.4",
           "Microsoft.SqlServer.TransactSql.ScriptDom": "180.78.1",
           "Newtonsoft.Json": "13.0.4",
-          "TeamTools.Common.Linting": "1.6.2415"
+          "TeamTools.Common.Linting": "1.6.2416"
         }
       },
       "envdte": {
@@ -424,13 +424,13 @@
       },
       "MessagePack.Annotations": {
         "type": "Transitive",
-        "resolved": "3.1.7",
-        "contentHash": "IW1yX9viarFl/Dsio5G+pM90JkOSW4xhAiJcKxPPF5rzyp2/yCpieWju8G99QLEmaQeze2uQMEskUBA59YZmkw=="
+        "resolved": "3.1.12",
+        "contentHash": "LdI67sY7F3KK+JsrG02+DP1XFkowaZSoyfL2M88hjm1MOOsjf8amBLAJolV+zxoPUZf3uGbKzq1cMQD8PlpSpA=="
       },
       "MessagePackAnalyzer": {
         "type": "Transitive",
-        "resolved": "3.1.7",
-        "contentHash": "ZF+OOJTRS7Ogzb4gG36hPKVQk3kEbp6kkUcdRjhddDq/uSGcV4BKIdYiyJipExXyE/zsqYb0ic215O9kI+fjPA=="
+        "resolved": "3.1.12",
+        "contentHash": "iNSNatPh6bafRUbkQKlClExjpPpd8hiZgfZsodGf7bheIlkizGbMzsJ2mPui8jOHRe4Ky9eg5ou/fFzI7CT3fg=="
       },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",

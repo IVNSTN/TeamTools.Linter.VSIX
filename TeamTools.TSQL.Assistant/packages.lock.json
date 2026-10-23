@@ -38,8 +38,8 @@
       "TeamTools.Common.Linting": {
         "type": "Direct",
         "requested": "[1.*, )",
-        "resolved": "1.6.2415",
-        "contentHash": "YnJk/eIWd1uwKDBXcqzNm7Jk3e77cqg2F8GX1M93nEeVo0dgoDWB+Wr5T5s2O0Ap/17UmTa1WO257Fd04mfL9g==",
+        "resolved": "1.6.2416",
+        "contentHash": "xNXpN/dKGqGmCyB6t1ndbJ4J0O6klt69PyaAMHz/rz++EAQW99vOPbNpvrTYxdp9gX9Df2IcuXRxqOEL4Rs+YQ==",
         "dependencies": {
           "Microsoft.NETCore.Platforms": "7.0.4",
           "Newtonsoft.Json": "13.0.4"
